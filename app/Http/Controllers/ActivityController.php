@@ -50,12 +50,10 @@ class ActivityController extends Controller
         $cad = $this->objActivity->create([
             'descricao'=>$request->descricao,
             'nivel'=>$request->nivel,
-            'status'=>1,
+            'status'=>$request->status,
             'categoria'=>$request->categoria,
             'user_id'=>$request->user_id
         ]);
-        
-        dd($request->status);
 
         if($cad){
             return redirect('activity');
@@ -100,13 +98,12 @@ class ActivityController extends Controller
         $this->objActivity->where(['id'=>$id])->update([
             'descricao'=>$request->descricao,
             'nivel'=>$request->nivel,
-            // 'status'=>$request->status,
-            'status'=>1,
+            'status'=>$request->status,
+            // 'status'=>1,
             'categoria'=>$request->categoria,
             'user_id'=>$request->user_id
         ]);
 
-        dd($request->status);
         return redirect ('activity');
     }
 
