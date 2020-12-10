@@ -58,6 +58,7 @@
                             <option value="1">Concluído</option>
                         </select>
                     </div>
+                    <div class="col-3"></div>
                     <div class="col-3">
                         <label for="nivel">Nível</label>
                         <input class="form-control" id="nivel" name="nivel" type="text" placeholder="Nível" value="{{$activity->nivel ?? ''}}" required><br>
