@@ -43,17 +43,15 @@ class AtividadeController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'user_id'   => 'required|numeric',
+            'descricao' => 'required|string|max:30',
+            'nivel'     => 'required|integer',
+            'status'    => 'required|boolean',
+        ]);
+
         $dados = $request->json()->all();
-
-        $atividade = new Atividade();
-
-        $atividade->user_id   = $dados['user_id'];
-        $atividade->descricao = $dados['descricao'];
-        $atividade->categoria = $dados['categoria'];
-        $atividade->nivel     = $dados['nivel'];
-        $atividade->status    = $dados['status'];
-
-        $atividade->save();
+        $atividade = Atividade::create($dados);
 
         $result = [
             'message'   => 'Salvo com sucesso',
