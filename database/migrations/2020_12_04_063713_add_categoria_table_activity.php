@@ -14,7 +14,7 @@ class AddCategoriaTableActivity extends Migration
     public function up()
     {
         Schema::table('activity', function (Blueprint $table) {
-            $table->string('categoria')->after('status');
+            $table->string('categoria')->after('status')->nullable();
         });
     }
 
