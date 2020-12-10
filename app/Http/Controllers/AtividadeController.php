@@ -107,8 +107,28 @@ class AtividadeController extends Controller
      * Deletar
      *
      */
-    public function destroy($id)
+    public function deletar($id)
     {
-        //
+        $atividade = Atividade::find($id);
+
+        if (!$atividade) {
+            $result = [
+                'message' => 'Atividade não encontrada'
+            ];
+            return response()->json($result, 404);
+        }
+
+        if (!$atividade->delete()) {
+            $result = [
+                'success' => false,
+                'message' => 'Falha ao deletar o arquivo'
+            ];
+            return response()->json($result, 422);
+        }
+
+        $result = [
+            'message' => 'Deletado com sucesso'
+        ];
+        return response()->json($result, 200);
     }
 }
