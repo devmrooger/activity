@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get   ('atividades'     , 'AtividadeController@index');
-Route::get   ('atividades/{id}', 'AtividadeController@show');
-Route::post  ('atividades'     , 'AtividadeController@store');
-Route::put   ('atividades/{id}', 'AtividadeController@update');
-Route::delete('atividades/{id}', 'AtividadeController@deletar');
+// Route::get   ('atividades'     , 'AtividadeController@index');
+// Route::get   ('atividades/{id}', 'AtividadeController@show');
+// Route::post  ('atividades'     , 'AtividadeController@store');
+// Route::put   ('atividades/{id}', 'AtividadeController@update');
+// Route::delete('atividades/{id}', 'AtividadeController@deletar');
 
+Route::resource('atividades', 'AtividadeController');

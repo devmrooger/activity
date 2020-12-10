@@ -107,7 +107,7 @@ class AtividadeController extends Controller
      * Deletar
      *
      */
-    public function deletar($id)
+    public function destroy($id)
     {
         $atividade = Atividade::find($id);
 
