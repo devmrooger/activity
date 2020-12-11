@@ -25,3 +25,4 @@ use Illuminate\Support\Facades\Route;
 // Route::delete('atividades/{id}', 'AtividadeController@deletar');
 
 Route::resource('atividades', 'AtividadeController');
+Route::resource('categorias' , 'CategoriaController');

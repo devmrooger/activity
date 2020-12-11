@@ -4,126 +4,122 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Atividade;
+use App\Models\Categoria;
 
-class AtividadeController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Listar
-     *
+     * 
      */
     public function index()
     {
-        $atividades = Atividade::all();
-        return $atividades;
+        $categoria = Categoria::all();
+        return $categoria;
     }
-
 
     /**
      * Consultar
-     *
+     * 
      */
     public function show($id)
     {
-        $atividade = Atividade::find($id);
+        $categoria = Categoria::find($id);
 
-        if (!$atividade) {
+        if(!$categoria){
             $result = [
-                'message' => 'Atividade não encontrada'
+                'message' => 'Categoria não encontrada',
             ];
+
             return response()->json($result, 404);
         }
 
-        return $atividade;
-    }    
+        return $categoria;
+    }
 
     /**
      * Salvar
-     *
+     * 
      */
     public function store(Request $request)
     {
         request()->validate([
-            'user_id'   => 'required|numeric',
-            'categoria_id'   => 'required|numeric',
-            'descricao' => 'required|string|max:30',
-            'nivel'     => 'required|integer',
-            'status'    => 'required|boolean',
+            'descricao'   => 'required|string|max:30',
         ]);
 
         $dados = $request->json()->all();
-        $atividade = Atividade::create($dados);
+        $categoria = Categoria::create($dados);
 
         $result = [
             'message'   => 'Salvo com sucesso',
-            'atividade' => $atividade
+            'atividade' => $categoria,
         ];
-        return response()->json($result, 201);
 
+        return response()->json($result, 201);
     }
 
     /**
      * Atualizar
-     *
+     * 
      */
     public function update(Request $request, $id)
-    {   
+    {
         // Validação da Requisição
         // ------------------------------------------------
         request()->validate([
-            'user_id'   => 'required|numeric',
-            'categoria_id'   => 'required|numeric',
-            'descricao' => 'required|string|max:50',
-            'nivel'     => 'required|integer',
-            'status'    => 'required|boolean',
+            'descricao'   => 'required|string|max:30',
         ]);
 
         // Dados da Requisição
         // ------------------------------------------------
         $dados = $request->json()->all();
-        
-        // Localização a Atividade
+
+        // Localização a Categoria
         // ------------------------------------------------
-        $atividade = Atividade::find($id);
-        if (!$atividade) {
+        $categoria = Categoria::find($id);
+        if(!$categoria){
             $result = [
-                'message' => 'Atividade não encontrada'
+                'message' => 'Categoria não encontrada',
             ];
+
             return response()->json($result, 404);
         }
-        
-        // Atualizar a Atividade
+
+        // Atualizar a Categoria
         // ------------------------------------------------
-        $atividade->update($dados);
+        $categoria->update($dados);
 
         // Retorno da API
         // ------------------------------------------------
+        $categoria = Categoria::create($dados);
         $result = [
-            'message'   => 'Atualizado com sucesso',
-            'atividade' => $atividade
+            'message'   => 'Salvo com sucesso',
+            'atividade' => $categoria,
         ];
-        return response()->json($result, 200);
+
+        return response()->json($result, 201);
     }
 
     /**
      * Deletar
-     *
+     * 
      */
     public function destroy($id)
     {
-        $atividade = Atividade::find($id);
+        $categoria = Categoria::find($id);
 
-        if (!$atividade) {
+        if(!$categoria){
             $result = [
-                'message' => 'Atividade não encontrada'
+                'message' => 'Categoria não encontrada',
             ];
+
             return response()->json($result, 404);
         }
 
-        if (!$atividade->delete()) {
+        if (!$categoria->delete()) {
             $result = [
-                'success' => false,
-                'message' => 'Falha ao deletar o arquivo'
+                'sucess'  => false,
+                'message' => 'Falha ao deletar arquivo'
             ];
             return response()->json($result, 422);
         }

@@ -14,10 +14,15 @@ class CreateModelActivitiesTable extends Migration
     public function up()
     {
         Schema::create('activity', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            
             $table->integer('user_id')->unsigned();
+            $table->integer('categoria_id')->unsigned();
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('descricao', '30');
+            $table->foreign('categoria_id')->references('id')->on('categoria')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->string('descricao', '50');
             $table->integer('nivel');
             $table->boolean('status');
             $table->timestamps();

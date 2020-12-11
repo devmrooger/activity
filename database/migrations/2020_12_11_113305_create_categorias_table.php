@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoriaTableActivity extends Migration
+class CreateCategoriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddCategoriaTableActivity extends Migration
      */
     public function up()
     {
-        Schema::table('activity', function (Blueprint $table) {
-            $table->string('categoria')->after('status')->nullable();
+        Schema::create('categoria', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('descricao', '30')->unique();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddCategoriaTableActivity extends Migration
      */
     public function down()
     {
-        Schema::table('activity', function (Blueprint $table) {
-            $table->dropColumn('categoria');
-        });
+        Schema::dropIfExists('categoria');
     }
 }
